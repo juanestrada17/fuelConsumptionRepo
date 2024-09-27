@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-striped table-bordered table-dark w-100">
+  <thead>
+    <tr>
+      <th scope="col">Model Year</th>
+      <th scope="col">Make</th>
+      <th scope="col">Model</th>
+      <th scope="col">Vehicle Class</th>
+        <th scope="col">Co2 Emission</th>
+        <th scope="col">Co2 Rating</th>
+        <th scope="col">Co2 Smog Rating</th>
+        <th scope="col">Create / Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if vehicles %}
+        {% for vehicle in vehicles %}
+    <tr>
+        <th scope="row">
+            {{ vehicle.model_year}}
+        </th>
+        <td>
+            {{ vehicle.make }}
+        </td>
+        <td>
+            {{ vehicle.model }}
+        </td>
+        <td>
+            {{ vehicle.vehicle_class }}
+        </td>
+        <td>
+            {{ vehicle.co2_emission}}
+        </td>
+        <td>
+            {{ vehicle.co2_rating}}
+        </td>
+        <td>
+            {{ vehicle.smog_rating}}
+        </td>
+        <td>
+            <a href='/update_one/{{ vehicle.id }}' class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Update</a>
+            <form action="{{ url_for('vehicle.delete_vehicle', veh_id=vehicle.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" id="deleteVehicle" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </td>
+    </tr>
+        {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}
+
+

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+        <div style="display: flex; margin: 1rem; flex-direction: column; justify-content: center; align-items: center;">
+                <form action="/update_one/{{ vehicle.id }}" method="POST">
+                  <div>
+                      <h2 >Update a Vehicle</h2>
+                  </div>
+                <div class="form-group">
+                    <label for="new_model">Model</label>
+                    <input type="text" name="new_model" class="form-control" id="new_model" placeholder="Enter Model" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="new_make">Make</label>
+                    <input type="text" name="new_make" class="form-control" id="new_make" placeholder="Enter Make" required>
+                </div>
+
+                <button style='margin: 1rem 1rem;' type="submit" class="btn btn-primary">Update</button>
+
+            </form>
+        </div>
+
+    {% if success_message %}
+        <div style='margin: 1rem 0; text-align: center; font-size: 1.5rem; padding: 1rem' class="alert alert-success" role="alert">
+            {{ success_message }}
+        </div>
+    {% endif %}
+{% endblock %}

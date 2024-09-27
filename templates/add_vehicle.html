@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if success_message %}
+        <div style='margin: 1rem 0; text-align: center' class="alert alert-success" role="alert">
+            {{ success_message }}
+        </div>
+    {% endif %}
+
+      <form action="/insert_one" method="POST">
+      <div style="width:10%; margin: 0 auto;">
+          <h2 style="margin: 1rem 0" >Add a Vehicle</h2>
+      </div>
+      <div class="form-group">
+        <label for="model_year">Model Year</label>
+            <input type="text" name="model_year" class="form-control" id="model_year" placeholder="Enter Model Year" required>
+      </div>
+          <div class="form-group">
+        <label for="make">Make</label>
+            <input type="text" name="make" class="form-control" id="make" placeholder="Enter Make" required>
+      </div>
+          <div class="form-group">
+        <label for="model">Model</label>
+            <input type="text"  name="model" class="form-control" id="model" placeholder="Enter Model" required>
+      </div>
+          <div class="form-group">
+        <label for="vehicle_class">Vehicle Class</label>
+            <input type="text" name="vehicle_class" class="form-control" id="vehicle_class" placeholder="Enter Vehicle Class" required>
+      </div>
+          <div class="form-group">
+        <label for="engine_size">Engine Size</label>
+            <input type="text" name="engine_size" class="form-control" id="engine_size" placeholder="Enter Engine Size" required>
+      </div>
+          <div class="form-group">
+        <label for="cylinder">Cylinder</label>
+            <input type="text" name="cylinder" class="form-control" id="cylinder" placeholder="Enter Cylinder" required>
+      </div>
+          <div class="form-group">
+        <label for="transmission">Transmission</label>
+            <input type="text" name="transmission" class="form-control" id="transmission" placeholder="Enter Transmission" required>
+      </div><div class="form-group">
+        <label for="fuel_type">Fuel Type</label>
+            <input type="text" name="fuel_type" class="form-control" id="fuel_type" placeholder="Enter Fuel Type" required>
+      </div>
+          <div class="form-group">
+        <label for="city_l_100km">City Consumption per 100km</label>
+            <input type="text" name="city_l_100km" class="form-control" id="city_l_100km" placeholder="Enter City Consumption in Liters per 100km" required>
+      </div>
+          <div class="form-group">
+        <label for="highway_l_100km">Highway Consumption per 100km</label>
+            <input type="text" name="highway_l_100km" class="form-control" id="highway_l_100km" placeholder="Enter Highway Consumption in Liters per 100km" required>
+      </div>
+           <div class="form-group">
+        <label for="combined_l_100km">Combined Consumption per 100km</label>
+            <input type="text" name="combined_l_100km" class="form-control" id="combined_l_100km" placeholder="Enter Combined Consumption in Liters per 100km" required>
+      </div>
+           <div class="form-group">
+        <label for="combined_mpg">Combined rating per 100km</label>
+            <input type="text" name="combined_mpg" class="form-control" id="combined_mpg" placeholder="Enter Combined rating in Liters per 100km" required>
+      </div> <div class="form-group">
+        <label for="co2_emission">Co2 Emission</label>
+            <input type="text" name="co2_emission" class="form-control" id="co2_emission" placeholder="Enter Co2 Emission" required>
+      </div>
+          <div class="form-group">
+        <label for="co2_rating">Co2 Rating</label>
+            <input type="text" name="co2_rating" class="form-control" id="co2_rating" placeholder="Enter Co2 Rating" required>
+      </div>
+          <div class="form-group">
+        <label for="smog_rating">Smog Rating</label>
+            <input type="text" name="smog_rating" class="form-control" id="smog_rating" placeholder="Enter Smog Rating" required>
+      </div>
+
+      <button style='margin: 1rem 1rem;' type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+    <br>
+{% endblock %}
