@@ -3,8 +3,11 @@ Filename: DataSetReader.py
 Author: Juan Estrada
 Date: 2024-09-16
 Description: Reads the csv file and returns an array of vehicle objects
+Modified date: 2024-09-29
 """
 import os
+import uuid
+
 import pandas as pd
 from pymongo import MongoClient
 from models.Vehicle import Vehicle
@@ -29,6 +32,7 @@ def dataset_reader(file_path):
     try:
         df = pd.read_csv(file_path, encoding='latin-1')
         for _, row in df.iterrows():
+            _id = uuid.uuid4()
             model_year = row['Model year']
             make = row['Make']
             model = row['Model']
@@ -46,7 +50,7 @@ def dataset_reader(file_path):
             smog_rating = row['Smog rating']
             vehicle = Vehicle(model_year, make, model, vehicle_class, engine_size, cylinder, transmission, fuel_type,
                               city_l_100km, highway_l_100km, combined_l_100km, combined_mpg, co2_emission, co2_rating,
-                              smog_rating)
+                              smog_rating, str(_id))
             vehicles.append(vehicle)
     except FileNotFoundError:
         print("File could not be found")
@@ -70,13 +74,7 @@ def add_vehicles_array(vehicles):
     return vehicles_array[:100]
 
 
-def seed_database():
-    """ Inserts an array of dictionaries made from the fuel consumption ratings
-    dataset into the specified collection """
-    try:
-        dataset = 'my2024-fuel-consumption-ratings.csv'
-        vehicles = dataset_reader(dataset)
-        vehicles_arr = add_vehicles_array(vehicles)
-        collection.insert_many(vehicles_arr)
-    except Exception as e:
-        print(f"Error seeding the database {e}")
+def create_csv_from_array(vehicles):
+    """ Creates csv file using an array """
+    df = pd.DataFrame(vehicles)
+    df.to_csv('vehicles.csv', index=False)

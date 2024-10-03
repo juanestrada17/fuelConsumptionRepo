@@ -5,10 +5,9 @@ Date: 2024-09-16
 Description: Tests the datasetReader() function
 """
 
-import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 import pandas as pd
-from DataSetReader import dataset_reader, Vehicle
+from DataSetReader import dataset_reader
 
 
 @patch('DataSetReader.pd.read_csv')

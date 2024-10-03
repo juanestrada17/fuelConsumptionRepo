@@ -3,6 +3,7 @@ Filename: Vehicle.py
 Author: Juan Estrada
 Date: 2024-09-16
 Description: Contains the Vehicle class and its attributes.
+Modified date: 2024-09-29
 """
 
 
@@ -29,12 +30,13 @@ class Vehicle:
         (worst) to 10 (best)
         smog_rating (int): The vehicle's tailpipe emissions of smog-forming pollutants rated on a scale from 1 (worst)
          to 10 (best) n/a
+         _id: id of the record stored in the database
     """
 
     def __init__(self, model_year: int, make: str, model: str, vehicle_class: str, engine_size: float,
                  cylinder: int, transmission: str, fuel_type: str, city_l_100km: float,
                  highway_l_100km: float, combined_l_100km: float, combined_mpg: int, co2_emission: int,
-                 co2_rating: int, smog_rating: int, id: str = None
+                 co2_rating: int, smog_rating: int, _id: str
                  ):
         """
         Initializes a vehicle object
@@ -58,8 +60,10 @@ class Vehicle:
             (worst) to 10 (best)
             smog_rating (int): The vehicle's tailpipe emissions of smog-forming pollutants rated on a scale from 1 (worst)
              to 10 (best) n/a
+            _id: id of the record stored in the database
+
         """
-        self.id = id
+        self._id = _id
         self.model_year = model_year
         self.make = make
         self.model = model
@@ -91,7 +95,7 @@ class Vehicle:
     def vehicle_to_dic(self):
         """ Transforms a vehicle to a dictionary """
         return {
-            'id': self.id,
+            "_id": self._id,
             'model_year': self.model_year,
             'make': self.make,
             'model': self.model,
@@ -100,20 +104,20 @@ class Vehicle:
             'cylinder': self.cylinder,
             'transmission': self.transmission,
             'fuel_type': self.fuel_type,
-            'city_l_100km': self.city_l_100km,
-            'highway_l_100km': self.highway_l_100km,
-            'combined_l_100km': self.combined_l_100km,
-            'combined_mpg': self.combined_mpg,
-            'co2_emission': self.co2_emission,
-            'co2_rating': self.co2_rating,
-            'smog_rating': self.smog_rating
+            'city_l_100km': float(self.city_l_100km),
+            'highway_l_100km': float(self.highway_l_100km),
+            'combined_l_100km': float(self.combined_l_100km),
+            'combined_mpg': float(self.combined_mpg),
+            'co2_emission': float(self.co2_emission),
+            'co2_rating': float(self.co2_rating),
+            'smog_rating': float(self.smog_rating)
         }
 
     # transforms data received from dictionary into obj
     @staticmethod
     def vehicle_from_dict(data):
         """ Transforms a dictionary into a vehicle object """
-        return Vehicle(id=data.get('_id'), model_year=data['model_year'], make=data['make'], model=data['model'],
+        return Vehicle(_id=data.get('_id'), model_year=data['model_year'], make=data['make'], model=data['model'],
                        vehicle_class=data['vehicle_class'],
                        engine_size=data['engine_size'], cylinder=data['cylinder'], transmission=data['transmission'],
                        fuel_type=data['fuel_type'],

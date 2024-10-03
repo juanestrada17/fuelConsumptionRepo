@@ -22,10 +22,10 @@
             {{ vehicle.model_year}}
         </th>
         <td>
-            {{ vehicle.make }}
+            {{ vehicle.model }}
         </td>
         <td>
-            {{ vehicle.model }}
+            {{ vehicle.make }}
         </td>
         <td>
             {{ vehicle.vehicle_class }}
@@ -40,8 +40,8 @@
             {{ vehicle.smog_rating}}
         </td>
         <td>
-            <a href='/update_one/{{ vehicle.id }}' class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Update</a>
-            <form action="{{ url_for('vehicle.delete_vehicle', veh_id=vehicle.id) }}" method="POST" style="display:inline;">
+            <a href='/update_one/{{ vehicle._id }}' class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Update</a>
+            <form action="{{ url_for('vehicle.delete_vehicle', veh_id=vehicle._id) }}" method="POST" style="display:inline;">
                     <button type="submit" id="deleteVehicle" class="btn btn-danger btn-sm">Delete</button>
             </form>
         </td>

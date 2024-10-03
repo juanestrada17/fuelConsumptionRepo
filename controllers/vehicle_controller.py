@@ -3,6 +3,7 @@ Filename: vehicle_controller.py
 Author: Juan Estrada
 Date: 2024-09-16
 Description: VehicleController that handles interaction between views and services
+Modified date: 2024-09-29
 """
 
 from services.vehicle_service import VehicleService
@@ -16,12 +17,12 @@ class VehicleController:
     def insert_vehicle(self, model_year, make, model, vehicle_class, engine_size,
                        cylinder, transmission, fuel_type, city_l_100km,
                        highway_l_100km, combined_l_100km, combined_mpg, co2_emission,
-                       co2_rating, smog_rating):
+                       co2_rating, smog_rating, _id):
         """ Controller method that handles inserting a vehicle to the database """
         return self.service.insert_vehicle(model_year, make, model, vehicle_class, engine_size,
                                            cylinder, transmission, fuel_type, city_l_100km,
                                            highway_l_100km, combined_l_100km, combined_mpg, co2_emission,
-                                           co2_rating, smog_rating)
+                                           co2_rating, smog_rating, _id)
 
     def insert_vehicles(self, vehicles):
         """ Controller method that handles inserting many vehicles to the database """
@@ -43,6 +44,14 @@ class VehicleController:
         """ Controller method that handles deleting a vehicle from the database """
         return self.service.delete_vehicle(veh_id)
 
+    def create_csv(self):
+        """ Controller method that handles creating a csv file from data"""
+        return self.service.create_csv()
+
     def seed_database(self):
         """ Controller method that handles seeding the database """
         return self.service.seed_database()
+
+    def generate_chart(self, column):
+        """ Controller method that handles generating a chart """
+        return self.service.generate_chart(column)

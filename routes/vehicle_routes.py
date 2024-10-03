@@ -3,10 +3,13 @@ Filename: vehicle_routes.py
 Author: Juan Estrada
 Date: 2024-09-16
 Description: Defining the routes used in the application
+Modified date: 2024-09-29
 """
+import uuid
 
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 from controllers.vehicle_controller import VehicleController
+from routes.route_utility import chart_title
 
 vehicle_blueprint = Blueprint("vehicle", __name__)
 controller = VehicleController()
@@ -28,6 +31,7 @@ def insert_form():
 @vehicle_blueprint.route('/insert_one', methods=['POST'])
 def insert_vehicle():
     """ Handles inserting a record into the database by grabbing the form elements """
+    _id = uuid.uuid4()
     model_year = request.form['model_year']
     make = request.form['make']
     model = request.form['model']
@@ -46,7 +50,7 @@ def insert_vehicle():
 
     controller.insert_vehicle(model_year, make, model, vehicle_class, engine_size, cylinder,
                               transmission, fuel_type, city_l_100km, highway_l_100km, combined_l_100km,
-                              combined_mpg, co2_emission, co2_rating, smog_rating)
+                              combined_mpg, co2_emission, co2_rating, smog_rating, str(_id))
 
     return render_template('add_vehicle.html', success_message='Vehicle inserted successfully!')
 
@@ -115,3 +119,32 @@ def seed_database():
     """ Handles seeding the database with new records """
     controller.seed_database()
     return render_template('seed_db.html', success_message='Database seeded successfully!')
+
+
+@vehicle_blueprint.route('/create_csv')
+def navigate_to_csv():
+    """ Handles rendering of create_csv.html """
+    return render_template('create_csv.html')
+
+
+@vehicle_blueprint.route('/create_csv', methods=['POST'])
+def create_csv():
+    """ Handles creating of csv file """
+    controller.create_csv()
+    return render_template('create_csv.html', success_message='Csv file created successfully!')
+
+
+@vehicle_blueprint.route('/graph/<column>')
+def render_graph(column):
+    """ Renders the graph.html and assigns a title depending on the column passed"""
+    title = chart_title(column)
+    return render_template('graph.html', column=column, chart_title=title)
+
+
+@vehicle_blueprint.route('/plot/<column>')
+def plot_image(column):
+    """ Returns a graph image by calling the generate_chart from the controller"""
+    graph = controller.generate_chart(column)
+    return graph
+
+

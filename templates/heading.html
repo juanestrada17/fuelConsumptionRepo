@@ -13,7 +13,21 @@
         <a class="nav-link" href="/insert_form">Insert a new vehicle </a>
       </li>
         <li class="nav-item active">
+        <a class="nav-link" href="/create_csv">Add Data to csv file</a>
+      </li>
+        <li class="nav-item active">
         <a class="nav-link" href="/seed_database">Refresh data with dataset</a>
+      </li>
+      <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="/graph" role="button" id='graphDrop' data-bs-toggle="dropdown">Fuel Consumption Graphs</a>
+          <ul class="dropdown-menu" aria-labelledby="graphDrop">
+              <li><a class="dropdown-item" href="/graph/make_mpg">Combined mpg per make</a></li>
+              <li><a class="dropdown-item" href="/graph/engine_mpg">Engine size mpg scatter plot</a></li>
+              <li><a class="dropdown-item" href="/graph/transmission">Transmission</a></li>
+              <li><a class="dropdown-item" href="/graph/fuel_mpg">Fuel type mpg</a></li>
+              <li><a class="dropdown-item" href="/graph/consumption"> Fuel consumption per make</a></li>
+              <li><a class="dropdown-item" href="/graph/co2_emission">Co2 Emission</a></li>
+          </ul>
       </li>
     </ul>
   </div>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+    <div>
+        <h2 style="margin: 1rem 1rem;"> {{ chart_title }} </h2>
+
+    </div>
+
+    <div>
+        <img src="/plot/{{ column }}" width="600" alt="text">
+    </div>
+
+</div>
+{% endblock %}
